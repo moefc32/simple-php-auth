@@ -36,7 +36,7 @@ function check_loggedin()
     global $conn, $email;
     $check_if_exist = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email';");
 
-    if (isset($_SESSION['loggedin']) && mysqli_fetch_assoc($check_if_exist) != $_SESSION['loggedin']) {
+    if (!isset($_SESSION['loggedin']) || mysqli_fetch_assoc($check_if_exist) != $_SESSION['loggedin']) {
         http_response_code(405);
         die('Request method not allowed!');
     };
